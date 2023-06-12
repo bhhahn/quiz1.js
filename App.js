@@ -1,7 +1,41 @@
-import { StatusBar } from 'expo-status-bar';
+import React,{useState} from 'react';
 import { StyleSheet, Text, View, Button} from 'react-native';
+import Roster from './Roster';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-export default function App() {
+const Stack = createNativeStackNavigator();
+
+const HomeScreen = ({navigation}) => {
+    return (
+     <View>
+            <Button
+                title="Roster"
+                onPress={() =>
+                navigation.navigate('Roster')
+                }
+            />
+      </View>
+    );
+  };
+
+const MyStack = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{title: 'Welcome'}}
+        />
+        <Stack.Screen name="Main" component={App} />
+        <Stack.Screen name="Roster" component={Roster} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+export default function Main() {
   return (
     <View>
       <View style ={styles.header}>
